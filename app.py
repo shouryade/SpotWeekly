@@ -56,7 +56,7 @@ async def auth():
 
 
 @app.get('/callback')
-def callback(request: Request):
+async def callback(request: Request):
     result=request.query_params
     return templates.TemplateResponse('token.html', {"request": request,"token":str(result)[5:-23]})
 

@@ -18,7 +18,7 @@ id = os.getenv('CLIENT_ID')
 uri = os.getenv('REDIRECT_URI')
 AUTH_URL = 'https://accounts.spotify.com/authorize'
 
-
+#init css static files instance to be served 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 # init Jinja2 template instance
 templates = Jinja2Templates(directory="templates")

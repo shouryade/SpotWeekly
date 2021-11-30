@@ -1,3 +1,5 @@
 .env
 .vscode/*
 test.py
+Pipfile.lock
+__pycache__/*

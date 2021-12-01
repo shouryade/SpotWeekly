@@ -1,0 +1,49 @@
+@font-face {
+    font-family: Google Sans; 
+    src: url(https://fonts.gstatic.com/s/googlesans/v14/4UaGrENHsxJlGDuGo1OIlL3Owp4.woff2);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container {
+    margin-top: 10vh;
+    text-align: center;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    padding:10px;
+}
+h1{
+    font-size: min(4rem,11vw);
+}
+h2{
+    font-size: min(3rem,8.25vw);
+}
+h3{
+    font-size: min(1.6rem,4.4vw);
+}
+h4{
+    font-size: min(1.1rem,3vw);
+    margin: 5px 0;
+}
+
+body{
+     background:#303134;
+     font-family: Google Sans;
+     color:#cdd1d6;
+     width:100vw;
+     height:100vh;
+     overflow: hidden;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    word-wrap: break-word;
+}

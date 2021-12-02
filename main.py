@@ -5,12 +5,14 @@ from datetime import date
 
 load_dotenv()
 
-url = os.getenv('webhook_url')
-username = os.getenv('username')
-codeMessage = input("Enter code :\n")
+url = os.getenv("webhook_url")
+username = os.getenv("username")
+codeMessage = input("Enter access token :\n")
+# codeMessage=os.getenv("authToken")
 # term = input("Enter Spotify Playlist ID :\n")
-term = os.getenv('playlist_ID')
+term = os.getenv('playlist_ID') 
 codeMessage = codeMessage.strip()
+# refreshToken=os.getenv('ref_token')
 playlistItems = []
 
 

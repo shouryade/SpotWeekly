@@ -1,3 +1,4 @@
+import base64
 import os
 from dotenv import load_dotenv
 from fastapi import FastAPI, Request
@@ -9,6 +10,7 @@ import string
 import secrets
 import uvicorn
 from urllib.parse import urlencode
+import requests
 
 # initialization
 app = FastAPI()
@@ -16,6 +18,8 @@ app = FastAPI()
 load_dotenv()
 id = os.getenv('CLIENT_ID')
 uri = os.getenv('REDIRECT_URI')
+secret=os.getenv('CLIENT_SECRET')
+refreshToken=os.getenv('REFRESH_TOKEN')
 AUTH_URL = 'https://accounts.spotify.com/authorize'
 
 #init css static files instance to be served 
@@ -58,7 +62,17 @@ async def auth():
 @app.get('/callback')
 async def callback(request: Request):
     result=request.query_params
-    return templates.TemplateResponse('token.html', {"request": request,"token":str(result)[5:-23]})
+    result=str(result)[5:-23]
+    reqBody = {'grant_type': 'authorization_code', 'code': result,'redirect_uri':uri}
+    message=id+':'+secret
+    message_bytes = message.encode('ascii')
+    base64_bytes = base64.b64encode(message_bytes)
+    base64_message = base64_bytes.decode('ascii')
+    reqHeader={'Authorization':'Basic {}'.format(base64_message),'Content-Type':'application/x-www-form-urlencoded'}
+    r = requests.post('https://accounts.spotify.com/api/token', headers=reqHeader, data=reqBody)
+    token=r.json()['access_token']
+
+    return templates.TemplateResponse('token.html', {"request": request,"token":token})
 
 # main
 if __name__ == '__main__':

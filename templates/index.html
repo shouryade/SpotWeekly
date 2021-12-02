@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Spotify Login{% endblock %}
+
+{% block header %}Spotify OAuth{% endblock %}
+{% block content %}
+<br>
+<h3>Allow this app to have access to your Spotify Account?</h3>
+<h3>This app will have access to :</h3>
+<br>
+<h4>
+    <ul>
+        <li>
+            Create and Manage Your Playlists
+        </li>
+        <br>
+        <li>
+            Create and Manage Collaborative Playlists
+        </li>
+    </ul>
+</h4>
+<br>
+<a href="{{ url_for('auth') }}"><h3>Login with Spotify</h3></a>
+
+
+
+{% endblock %}

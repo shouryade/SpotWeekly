@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link href="/static/styles.css" rel="stylesheet">
+    <title>{% block title %}{% endblock %}</title>
+    {% endblock %}
+  </head>
+  <body>
+    <h1 class="lol" style="font-family: spotify-circular;
+      src: url(https://open.scdn.co/cdn/fonts/CircularSpUIv3T-Black.c21e63c5.woff2);">{% block header %}{% endblock %}</h1>
+    <div class="container" style="text-align: center;">
+      <div id="content">{% block content %}{% endblock %}</div>
+      <br>
+  </div>
+  <br>
+  {% block footer %}
+  <!-- <h2>lol</h2> -->
+  {% endblock %}
+  </div>
+  </body>
+</html>

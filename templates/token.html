@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Spotify Login{% endblock %}
+
+{% block header %}Spotify OAuth{% endblock %}
+{% block content %}
+<br>
+<h3>Your access token is :  </h3>
+<h3 id="tokenz">{{ token }}</h3>
+<br>
+<input type="button" class="btn btn-primary" onclick="copyToken()" data-toggle="tooltip" title="Click to Copy"
+    value="Copy to Clipboard" readonly />
+
+<script>
+    function copyToken() {
+        let copyText = document.getElementById("tokenz")
+
+        var selection = window.getSelection();
+
+        var range = document.createRange();
+
+        range.selectNodeContents(copyText);
+
+        selection.removeAllRanges();
+
+        selection.addRange(range);
+
+        document.execCommand('copy');
+    }
+</script>
+
+
+{% endblock %}

@@ -10,7 +10,7 @@ username = os.getenv("username")
 codeMessage = input("Enter access token :\n")
 # codeMessage=os.getenv("authToken")
 # term = input("Enter Spotify Playlist ID :\n")
-term = os.getenv('playlist_ID') 
+term = os.getenv('playlist_ID')
 codeMessage = codeMessage.strip()
 # refreshToken=os.getenv('ref_token')
 playlistItems = []
@@ -105,6 +105,7 @@ def addSongs():
             "Content-Type": "application/json"
         }
 
+        # Comment this line if you don't need a discord webhook to be sent.
         result = requests.post(url, json=data, headers=headers)
         print(f"Webhook sent with status code {result.status_code}")
 

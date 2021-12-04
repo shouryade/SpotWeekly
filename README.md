@@ -1,5 +1,6 @@
 # SpotWeekly
 Automate saving your Discover Weekly Playlist using Python.
+Made with <3 and FastAPI.  
 The saved playlist link is sent to my discord server via a webhook.
 
 ## Installation

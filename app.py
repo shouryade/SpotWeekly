@@ -19,7 +19,7 @@ load_dotenv()
 id = os.getenv('CLIENT_ID')
 uri = os.getenv('REDIRECT_URI')
 secret=os.getenv('CLIENT_SECRET')
-refreshToken=os.getenv('REFRESH_TOKEN')
+# refreshToken=os.getenv('REFRESH_TOKEN')
 AUTH_URL = 'https://accounts.spotify.com/authorize'
 
 #init css static files instance to be served 

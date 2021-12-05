@@ -25,7 +25,7 @@ Rename the `env.example` file to **`.env`**.
 <summary>Registering Your Spotify App on Spotify for Developers </summary>
 <br>
 <li>Create a <a href='https://developer.spotify.com/dashboard/applications'>Spotify Developer</a> account.</li>
-<li>Copy the client ID and paste it in the .env file.</li>
+<li>Copy the Client ID and Client SECRET and paste it in the .env file.</li>
 <li>Go to edit settings and set Redirect URI to <i>http://127.0.0.1:5000/callback</i> as shown</li>
 <br>
 <img src='readme-assets/callback.png'>

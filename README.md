@@ -54,10 +54,26 @@ Run `app.py` and copy the token supplied.
 Run `main.py` and supply the parameters asked.  
 Check Discord once `Successfully created playlist !` is printed on screen.  
 
+### Running it as a cronjob
+A Cron job is used to schedule events without human interaction.  
+Here I have used the following cronjob to run the FastAPI server.  
+```
+0 10 * * 1 /usr/bin/python ~/SpotWeekly/app.py 
+```  
+which basically translates to *run `app.py` at 10:00 AM every Monday*.  
+You can modify the scheduled job according to your convenience using https://crontab.guru.  
+
+Now,follow the given instructions :
+- In the terminal, type `crontab -e`. This launches Vi Editor.
+- Press `i` to launch `edit mode`.
+- Copy the text in `cron.txt` and paste it in the crontab file.
+- Type `:wq` to exit the editor and save changes.
+- You should see `crontab: installing new crontab`.
+
 ## Roadmap
 [ ] Create Docker instance.  
 [ ] Run this as a cron job using Github Workflows.  
-[ ] Create a bash script for a cron job if locally deployed.
+[ x ] Create a cron job if locally deployed.
 
 
 ## Contributing

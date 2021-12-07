@@ -1,0 +1,1 @@
+0 10 * * 1 /usr/bin/python ~/SpotWeekly/app.py

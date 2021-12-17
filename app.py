@@ -69,10 +69,10 @@ async def callback(request: Request):
     base64_bytes = base64.b64encode(message_bytes)
     base64_message = base64_bytes.decode('ascii')
     reqHeader={'Authorization':'Basic {}'.format(base64_message),'Content-Type':'application/x-www-form-urlencoded'}
-    r = requests.post('https://accounts.spotify.com/api/token', headers=reqHeader, data=reqBody)
-    token=r.json()['access_token']
+    # r = requests.post('https://accounts.spotify.com/api/token', headers=reqHeader, data=reqBody)
+    # token=r.json()['access_token']
 
-    return templates.TemplateResponse('token.html', {"request": request,"token":token})
+    return templates.TemplateResponse('token.html', {"request": request,"token":result})
 
 # main
 if __name__ == '__main__':

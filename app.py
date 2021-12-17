@@ -18,14 +18,15 @@ app = FastAPI()
 # load_dotenv()
 id = os.getenv('CLIENT_ID')
 uri = os.getenv('REDIRECT_URI')
-secret=os.getenv('CLIENT_SECRET')
+secret = os.getenv('CLIENT_SECRET')
 # refreshToken=os.getenv('REFRESH_TOKEN')
 AUTH_URL = 'https://accounts.spotify.com/authorize'
 
-#init css static files instance to be served 
+# init css static files instance to be served
 app.mount("/static", StaticFiles(directory="static"), name="static")
 # init Jinja2 template instance
 templates = Jinja2Templates(directory="templates")
+
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
@@ -34,13 +35,13 @@ async def home(request: Request):
 
 @app.get("/auth", response_class=HTMLResponse)
 async def auth():
-    
-    # The state can be useful for correlating requests and responses. 
-    # Because your redirect_uri can be guessed, using a state value can increase your assurance that an 
-    # incoming connection is the result of an authentication request. 
-    # If you generate a random string or encode the hash of some client state (e.g., a cookie) in this 
-    # state variable, you can validate the response to additionally ensure that the request and response 
-    # originated in the same browser. 
+
+    # The state can be useful for correlating requests and responses.
+    # Because your redirect_uri can be guessed, using a state value can increase your assurance that an
+    # incoming connection is the result of an authentication request.
+    # If you generate a random string or encode the hash of some client state (e.g., a cookie) in this
+    # state variable, you can validate the response to additionally ensure that the request and response
+    # originated in the same browser.
     # This provides protection against attacks such as cross-site request forgery. See RFC-6749.
 
     state = ''.join(
@@ -61,18 +62,20 @@ async def auth():
 
 @app.get('/callback')
 async def callback(request: Request):
-    result=request.query_params
-    result=str(result)[5:-23]
-    reqBody = {'grant_type': 'authorization_code', 'code': result,'redirect_uri':uri}
-    message=id+':'+secret
-    message_bytes = message.encode('ascii')
-    base64_bytes = base64.b64encode(message_bytes)
-    base64_message = base64_bytes.decode('ascii')
-    reqHeader={'Authorization':'Basic {}'.format(base64_message),'Content-Type':'application/x-www-form-urlencoded'}
-    # r = requests.post('https://accounts.spotify.com/api/token', headers=reqHeader, data=reqBody)
-    # token=r.json()['access_token']
+    result = request.query_params
+    result = str(result)[5:-23]
+    reqBody = {'grant_type': 'authorization_code',
+               'code': result, 
+               'redirect_uri': uri}
+    message = "{}:{}".format(id,secret)
+    base64_message = base64.urlsafe_b64encode(message.encode('UTF-8')).decode('ascii')
+    reqHeader = {'Authorization': 'Basic {}'.format(
+        base64_message), 'Content-Type': 'application/x-www-form-urlencoded'}
+    r = requests.post('https://accounts.spotify.com/api/token',
+                      headers=reqHeader, data=reqBody)
+    token = r.json()['access_token']
 
-    return templates.TemplateResponse('token.html', {"request": request,"token":result})
+    return templates.TemplateResponse('token.html', {"request": request, "token": result})
 
 # main
 if __name__ == '__main__':

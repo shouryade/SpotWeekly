@@ -15,7 +15,7 @@ import requests
 # initialization
 app = FastAPI()
 
-load_dotenv()
+# load_dotenv()
 id = os.getenv('CLIENT_ID')
 uri = os.getenv('REDIRECT_URI')
 secret=os.getenv('CLIENT_SECRET')

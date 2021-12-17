@@ -68,6 +68,7 @@ async def callback(request: Request):
                'code': result, 
                'redirect_uri': uri}
     message = "{}:{}".format(id,secret)
+    print(result)
     base64_message = base64.urlsafe_b64encode(message.encode('UTF-8')).decode('ascii')
     reqHeader = {'Authorization': 'Basic {}'.format(
         base64_message), 'Content-Type': 'application/x-www-form-urlencoded'}
@@ -75,7 +76,7 @@ async def callback(request: Request):
                       headers=reqHeader, data=reqBody)
     token = r.json()['access_token']
 
-    return templates.TemplateResponse('token.html', {"request": request, "token": result})
+    return templates.TemplateResponse('token.html', {"request": request, "token": token})
 
 # main
 if __name__ == '__main__':

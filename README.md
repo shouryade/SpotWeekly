@@ -15,7 +15,7 @@ pip install pipenv
 Activate and install dependencies using pipenv.
 ```bash
 cd SpotWeekly
-pipenv sync 
+pipenv install 
 ```
 For `venv` enthusiasts, I have provided a `requirements.txt` file to help install project dependencies.   
 

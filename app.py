@@ -47,15 +47,7 @@ async def auth():
     state = ''.join(
         secrets.choice(string.ascii_uppercase + string.digits) for _ in range(16)
     )
-
-    parameters = {
-        'client_id': id,
-        'response_type': 'code',
-        'redirect_uri': str(uri),
-        'scope': 'playlist-modify-private playlist-read-private playlist-modify-public playlist-read-collaborative',
-        'state': state,
-    }
-
+    parameters = {'client_id': id,'response_type': 'code','redirect_uri': str(uri),'scope': 'playlist-modify-private playlist-read-private playlist-modify-public playlist-read-collaborative','state': state}
     res = RedirectResponse(f'{AUTH_URL}/?{urlencode(parameters)}')
     return res
 
@@ -64,19 +56,15 @@ async def auth():
 async def callback(request: Request):
     result = request.query_params
     result = str(result)[5:-23]
-    reqBody = {'grant_type': 'authorization_code',
-               'code': result, 
-               'redirect_uri': uri}
+    reqBody = {'grant_type': 'authorization_code','code': result,'redirect_uri': uri}
     message = "{}:{}".format(id,secret)
-    print(result)
     base64_message = base64.urlsafe_b64encode(message.encode('UTF-8')).decode('ascii')
-    reqHeader = {'Authorization': 'Basic {}'.format(
-        base64_message), 'Content-Type': 'application/x-www-form-urlencoded'}
-    r = requests.post('https://accounts.spotify.com/api/token',
-                      headers=reqHeader, data=reqBody)
+    reqHeader = {'Authorization': 'Basic {}'.format(base64_message),'Content-Type': 'application/x-www-form-urlencoded'}
+    
+    r = requests.post('https://accounts.spotify.com/api/token',headers=reqHeader,data=reqBody)
     token = r.json()['access_token']
 
-    return templates.TemplateResponse('token.html', {"request": request, "token": token})
+    return templates.TemplateResponse('token.html', {"request": request, "token": token},status_code=302)
 
 # main
 if __name__ == '__main__':
